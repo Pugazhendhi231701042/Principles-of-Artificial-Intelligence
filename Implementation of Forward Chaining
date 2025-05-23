@@ -1,0 +1,29 @@
+Implementation of Forward Chaining
+Aim
+To implement a concise Forward Chaining algorithm that infers conclusions based on known
+facts and rules.
+Code
+def forward_chaining(kb, goal):
+ facts = set(kb['facts'])
+ added = True
+ while added:
+ added = False
+ for rule in kb['rules']:
+ if rule['then'] not in facts and all(cond in facts for cond in rule['if']):
+ facts.add(rule['then'])
+ added = True
+ return goal in facts
+kb = {
+ 'facts': ['Sunny', 'Weekend'],
+ 'rules': [
+ {'if': ['Sunny', 'Weekend'], 'then': 'GoForPicnic'},
+ {'if': ['GoForPicnic'], 'then': 'PackLunch'}
+ ]
+}
+goal = 'PackLunch'
+print(f"Should we pack lunch? =>", forward_chaining(kb, goal))
+Output
+Should we pack lunch? => True
+Result
+The system correctly inferred that we should pack lunch, based on the initial facts 'Sunny'
+and 'Weekend'.

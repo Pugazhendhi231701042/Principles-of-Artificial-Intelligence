@@ -1,0 +1,16 @@
+Implementation of Decision Tree
+Aim
+To implement a Decision Tree to predict if we can play tennis based on weather
+conditions.
+Code
+from sklearn.tree import DecisionTreeClassifier
+X = [[0, 0], [0, 1], [1, 0], [2, 1], [2, 0]]
+y = ['No', 'Yes', 'Yes', 'Yes', 'No'] # PlayTennis
+model = DecisionTreeClassifier()
+model.fit(X, y)
+print("Play Tennis?", model.predict([[0, 0]])[0])
+Output
+Play Tennis? No
+Result
+The decision tree predicts "No", we should not play tennis when it’s Sunny and
+Humidity is High

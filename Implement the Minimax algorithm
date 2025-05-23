@@ -1,0 +1,55 @@
+AIM:
+Implement the Minimax algorithm for a 2-player game (e.g., Tic-Tac-Toe).
+
+CODE:
+def minimax(board, depth, is_max):
+    scores = {'X': -1, 'O': 1, 'Tie': 0}
+
+    winner = check_winner(board)
+    if winner:
+        return scores[winner]
+
+    if is_max:
+        best = -float('inf')
+        for i in range(3):
+            for j in range(3):
+                if board[i][j] == ' ':
+                    board[i][j] = 'O'
+                    best = max(best, minimax(board, depth+1, False))
+                    board[i][j] = ' '
+        return best
+    else:
+        best = float('inf')
+        for i in range(3):
+            for j in range(3):
+                if board[i][j] == ' ':
+                    board[i][j] = 'X'
+                    best = min(best, minimax(board, depth+1, True))
+                    board[i][j] = ' '
+        return best
+
+def check_winner(board):
+    lines = board + list(zip(*board)) + [[board[i][i] for i in range(3)]] + [[board[i][2-i] for i in range(3)]]
+    for line in lines:
+        if line.count(line[0]) == 3 and line[0] != ' ':
+            return line[0]
+    if all(cell != ' ' for row in board for cell in row):
+        return 'Tie'
+    return None
+
+# Example board: 'X' is human, 'O' is AI
+board = [
+    ['X', 'O', 'X'],
+    ['X', 'O', ' '],
+    [' ', ' ', ' ']
+]
+
+score = minimax(board, 0, True)
+print("Minimax score for AI (O):", score)
+
+
+OUTPUT:
+Minimax score for AI (O): 1
+
+ RESULT:
+The Minimax algorithm suggests that the AI can win with the best move from this state.

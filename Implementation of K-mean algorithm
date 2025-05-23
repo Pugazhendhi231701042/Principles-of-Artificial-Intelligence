@@ -1,0 +1,15 @@
+Implementation of K-mean algorithm
+Aim
+To implement the K-Means clustering algorithm on a small
+dataset and group data into clusters.
+Code
+from sklearn.cluster import KMeans
+X = [[1, 2], [1, 4], [5, 8], [6, 9], [1, 0], [6, 6]]
+kmeans = KMeans(n_clusters=2, random_state=0)
+kmeans.fit(X)
+print("Cluster labels:", kmeans.labels_)
+Output
+Cluster labels: [1 1 0 0 1 0]
+Result
+The algorithm grouped the data into 2 clusters. Points with
+similar positions are assigned the same cluster label.

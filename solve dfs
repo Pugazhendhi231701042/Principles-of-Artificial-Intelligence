@@ -1,0 +1,37 @@
+AIM:
+Solve a maze using DFS (Depth First Search).
+
+
+CODE:
+def dfs(maze, x, y, end, path, visited):
+    if (x, y) == end:
+        path.append((x, y))
+        return True
+    if (x < 0 or x >= len(maze) or y < 0 or y >= len(maze[0]) or
+        maze[x][y] == 1 or (x, y) in visited):
+        return False
+    visited.add((x, y))
+    path.append((x, y))
+    for dx, dy in [(-1,0),(1,0),(0,-1),(0,1)]:
+        if dfs(maze, x+dx, y+dy, end, path, visited):
+            return True
+    path.pop()
+    return False
+
+maze = [
+    [0,1,0],
+    [0,0,0],
+    [1,1,0]
+]
+
+start, end = (0,0), (2,2)
+path = []
+dfs(maze, *start, end, path, set())
+print("Path:", path)
+
+
+OUTPUT:
+Path: [(0, 0), (1, 0), (1, 1), (1, 2), (2, 2)]
+
+RESULT:
+DFS successfully found a path from start to end in the maze.
